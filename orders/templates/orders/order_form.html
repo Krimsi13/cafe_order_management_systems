@@ -1,0 +1,31 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+<h1>Создать заказ</h1>
+
+<form action="{% url 'orders:order_create' %}" method="post">
+    {% csrf_token %}
+
+    <!-- Поле для выбора столика -->
+    <div class="form-group">
+        <label for="id_table_name">Номер стола:</label>
+        <input type="text" id="id_table_name" name="table_name" />
+    </div>
+
+    <!-- Список блюд для выбора -->
+    <div class="form-group">
+        <label>Выберите блюда:</label>
+        <ul style="list-style-type:none; padding-left:0; margin-top:10px;">
+            {% for choice in form.selected_items.field.choices %}
+                <li>
+                    <input type="checkbox" name="selected_items" id="id_selected_items_{{ forloop.counter0 }}" value="{{ choice.0 }}"/>
+                    <label for="id_selected_items_{{ forloop.counter0 }}">{{ choice.1 }}</label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <button type="submit">Создать заказ</button>
+</form>
+
+{% endblock %}
