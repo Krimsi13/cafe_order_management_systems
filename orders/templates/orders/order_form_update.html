@@ -1,0 +1,45 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+<h1>Редактировать заказ</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <!-- Поле для номера стола -->
+    <div class="form-group">
+        <label for="id_table_name">Номер стола:</label>
+        <input type="text" id="id_table_name" name="table_name" value="{{ order.table_name }}" />
+    </div>
+
+    <!-- Поле для выбора статуса -->
+    <div class="form-group">
+        <label for="id_status">Статус заказа:</label>
+        <select id="id_status" name="status">
+            {% for status_value, status_label in order.STATUS_CHOICES %}
+                <option value="{{ status_value }}" {% if order.status == status_value %}selected{% endif %}>{{ status_label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Список блюд для выбора -->
+    <div class="form-group">
+        <label>Выберите блюда:</label>
+        <ul style="list-style-type:none; padding-left:0; margin-top:10px;">
+            {% for choice in form.selected_items.field.choices %}
+            <li>
+                <input type="checkbox" name="selected_items" id="id_selected_items_{{ forloop.counter0 }}"
+                       value="{{ choice.0 }}"
+                       {% if choice.0 in selected_item_ids %}checked{% endif %}/>
+                <label for="id_selected_items_{{ forloop.counter0 }}">{{ choice.1 }}</label>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <button type="submit">Обновить заказ</button>
+</form>
+
+{% endblock %}
+
+
