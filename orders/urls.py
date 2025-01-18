@@ -9,7 +9,7 @@ from .views import (
 
 urlpatterns = [
     # CRUD
-    path('list/', OrderListView.as_view(), name='order_list'),
+    path('', OrderListView.as_view(), name='order_list'),
     path('create/', OrderCreateView.as_view(), name='order_create'),
     path('edit/<int:pk>/', OrderUpdateView.as_view(), name='order_update'),
     path('delete/<int:pk>/', OrderDeleteView.as_view(), name='order_delete'),

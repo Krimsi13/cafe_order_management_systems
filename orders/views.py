@@ -113,4 +113,4 @@ class OrderDeleteView(DeleteView):
     """Удаление заказа"""
     model = Order
     template_name = 'orders/order_confirm_delete.html'
-    success_url = reverse_lazy('order_list')
+    success_url = reverse_lazy('orders:order_list')
