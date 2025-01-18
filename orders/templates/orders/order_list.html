@@ -3,13 +3,23 @@
 <div class="ricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
 
 <!--    <form method="get" action="{% url 'orders:order_list' %}">-->
+<!--        {% csrf_token %}-->
 <!--        {{ form.as_p }}-->
 <!--        <button type="submit">Поиск</button>-->
 <!--    </form>-->
+<!--    <ul>-->
+<!--        {% for order in orders %}-->
+<!--            <li>-->
+<!--                Номер стола: {{ order.table_name }}<br>-->
+<!--                Статус: {{ order.status }}<br>-->
+<!--            </li>-->
+<!--        {% empty %}-->
+<!--            <p>Заказы отсутствуют.</p>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
 
 
     <div class="col-12 text-center">
-
         <table class="table">
             <h1 class="center">
                 Список имеющихся заказов

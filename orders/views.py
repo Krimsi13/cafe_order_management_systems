@@ -9,28 +9,7 @@ class OrderListView(ListView):
     model = Order
     template_name = 'orders/order_list.html'
     context_object_name = 'orders'
-    extra_context = {
-        'title': 'Система управления заказами в кафе'
-    }
-    form_class = OrderSearchForm
-    
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        table_name = self.request.GET.get('table_name', '')
-        status = self.request.GET.get('status', '')
-        
-        if table_name:
-            queryset = queryset.filter(table_name__icontains=table_name)
-        if status:
-            queryset = queryset.filter(status=status)
-        
-        return queryset
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = OrderSearchForm(self.request.GET)
-        return context
-    
+
 
 class OrderDetailView(DetailView):
     """Один заказ"""
@@ -114,3 +93,28 @@ class OrderDeleteView(DeleteView):
     model = Order
     template_name = 'orders/order_confirm_delete.html'
     success_url = reverse_lazy('orders:order_list')
+
+
+class OrderSearchListView(ListView):
+    """Поиск заказов"""
+    model = Order
+    template_name = 'orders/search_order_list.html'
+    context_object_name = 'orders'
+    form_class = OrderSearchForm
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        table_name = self.request.GET.get('table_name', '')
+        status = self.request.GET.get('status', '')
+        
+        if table_name:
+            queryset = queryset.filter(table_name__icontains=table_name)
+        if status:
+            queryset = queryset.filter(status=status)
+        
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = OrderSearchForm(self.request.GET)
+        return context

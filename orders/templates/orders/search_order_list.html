@@ -1,0 +1,78 @@
+{% extends "orders/base.html" %}
+{% block content %}
+<div class="ricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+
+    <form method="get" action="{% url 'orders:search_order_list' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Поиск</button>
+    </form>
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object.pk }}</h4>
+                </div>
+                <div class="card-body">
+                    <h6>Стол №{{ object.table_name }}</h6>
+                    <h1 class="card-title pricing-card-title">{{ object.total_price }}руб.</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        {{ object.get_items }}
+                    </ul>
+                    <p class="card-text">{{ object.get_status_display }}</p>
+
+                    <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-success"
+                           href="{% url 'orders:order_detail' object.pk %}">Просмотр</a>
+                        <a type="button" class="btn btn-sm btn-outline-warning"
+                           href="{% url 'orders:order_update' object.pk %}">Редактирование</a>
+                        <a type="button" class="btn btn-sm btn-outline-danger"
+                           href="{% url 'orders:order_delete' object.pk %}">Удаление</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-12 text-center">
+        <table class="table">
+            <h1 class="center">
+                Список заказов
+            </h1>
+            <thead>
+            <tr>
+                <th><h5>ID</h5></th>
+                <th><h5>Стол №</h5></th>
+                <th><h5>Список блюд</h5></th>
+                <th><h5>Общая стоимость</h5></th>
+                <th><h5>Статус</h5></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td>{{ object.table_name }}</td>
+                <td>{{ object.get_items }}</td>
+                <td>{{ object.total_price }}р.</td>
+                <td>{{ object.get_status_display  }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5"><p>Заказы отсутствуют.</p></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</div>
+
+
+{% endblock %}

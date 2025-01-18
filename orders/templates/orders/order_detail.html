@@ -1,0 +1,34 @@
+{% extends "orders/base.html" %}
+{% block content %}
+
+<div class="col-6">
+
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Заказ №{{ object.id }}</h4>
+        </div>
+
+        <div class="card-body">
+
+            <h3 class="card-title pricing-card-title">Стол №{{ object.table_name }}</h3>
+            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                <h4 class="card-title pricing-card-title">Стоимость заказа: {{ object.total_price }} руб.</h4>
+                <li><b>Список блюд: </b>{{ object.get_items }}</li>
+                <li><b>Статус </b>{{ object.get_status_display }}</li>
+            </ul>
+            <div class="btn-group">
+                <a type="button" class="btn btn-sm btn-outline-warning"
+                   href="{% url 'orders:order_update' object.pk %}">Редактирование</a>
+                <a type="button" class="btn btn-sm btn-outline-danger"
+                   href="{% url 'orders:order_delete' object.pk %}">Удаление</a>
+            </div>
+            <br>
+            <a style="margin-top: 10px;" class="p-2 btn btn-outline-primary" href="{% url 'orders:order_list' %}">
+                К списку заказов</a>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
