@@ -95,10 +95,10 @@ class OrderDeleteView(DeleteView):
     success_url = reverse_lazy('orders:order_list')
 
 
-class OrderSearchListView(ListView):
+class OrderManageListView(ListView):
     """Поиск заказов"""
     model = Order
-    template_name = 'orders/search_order_list.html'
+    template_name = 'orders/manage_order_list.html'
     context_object_name = 'orders'
     form_class = OrderSearchForm
     

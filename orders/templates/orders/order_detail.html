@@ -23,8 +23,10 @@
                    href="{% url 'orders:order_delete' object.pk %}">Удаление</a>
             </div>
             <br>
-            <a style="margin-top: 10px;" class="p-2 btn btn-outline-primary" href="{% url 'orders:order_list' %}">
-                К списку заказов</a>
+            <a style="margin-top: 10px;" class="p-2 btn btn-outline-primary"
+               href="{% url 'orders:order_list' %}">К списку заказов</a>
+            <a style="margin-top: 10px;" class="p-2 btn btn-outline-primary"
+               href="{% url 'orders:manage_order_list' %}">К управлению заказами</a>
 
         </div>
     </div>
