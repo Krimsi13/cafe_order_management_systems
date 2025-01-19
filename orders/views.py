@@ -96,7 +96,7 @@ class OrderDeleteView(DeleteView):
 
 
 class OrderManageListView(ListView):
-    """Поиск заказов"""
+    """Управление заказами"""
     model = Order
     template_name = 'orders/manage_order_list.html'
     context_object_name = 'orders'
@@ -118,3 +118,13 @@ class OrderManageListView(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = OrderSearchForm(self.request.GET)
         return context
+    
+class OrderRevenueListView(ListView):
+    """Оплаченные заказы"""
+    model = Order
+    template_name = 'orders/revenue_order_list.html'
+    context_object_name = 'orders'
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(status='paid')  # Фильтрация оплаченных заказов

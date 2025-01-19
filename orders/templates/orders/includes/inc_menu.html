@@ -4,6 +4,6 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'orders:order_list' %}">Список заказов</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'orders:order_create' %}">Создать заказ</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'orders:manage_order_list' %}">Управление заказами</a>
-        <a class="p-2 btn btn-outline-primary" href="#">Расчёт выручки</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'orders:revenue_order_list' %}">Расчёт выручки</a>
     </nav>
 </div>

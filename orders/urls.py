@@ -5,7 +5,7 @@ from .views import (
     OrderUpdateView,
     OrderDeleteView,
     OrderDetailView,
-    OrderManageListView,
+    OrderManageListView, OrderRevenueListView,
 )
 
 urlpatterns = [
@@ -15,6 +15,8 @@ urlpatterns = [
     path('edit/<int:pk>/', OrderUpdateView.as_view(), name='order_update'),
     path('delete/<int:pk>/', OrderDeleteView.as_view(), name='order_delete'),
     path('detail/<int:pk>/', OrderDetailView.as_view(), name='order_detail'),
-    # search
+    # manage
     path('manage/', OrderManageListView.as_view(), name='manage_order_list'),
+    # revenue
+    path('revenue/', OrderRevenueListView.as_view(), name='revenue_order_list'),
 ]
